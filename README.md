@@ -1,58 +1,172 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# TO-DO LIST — Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicação web de gerenciamento de tarefas desenvolvida com PHP e Laravel, permitindo organizar atividades do dia a dia de forma simples e prática.
 
-## About Laravel
+## Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [x] Cadastrar tarefas
+- [x] Listar tarefas cadastradas
+- [x] Adicionar descrição opcional
+- [x] Marcar tarefas como concluídas
+- [x] Reabrir tarefas concluídas
+- [x] Excluir tarefas
+- [x] Validar os dados do formulário
+- [x] Armazenar tarefas no banco de dados
+- [ ] Editar tarefas
+- [ ] Filtrar tarefas por status
+- [ ] Autenticação de usuários
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tecnologias utilizadas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **PHP** — linguagem de programação
+- **Laravel** — framework PHP
+- **PostgreSQL** — banco de dados relacional
+- **Blade** — mecanismo de templates do Laravel
+- **HTML5** — estrutura das páginas
+- **CSS3** — estilização da interface
+- **Eloquent ORM** — interação com o banco de dados
 
-## Learning Laravel
+## Pré-requisitos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Antes de executar o projeto, certifique-se de ter instalado:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP em uma versão compatível com a versão do Laravel utilizada
+- Composer
+- PostgreSQL
+- Extensões PHP necessárias para o Laravel e para o PostgreSQL
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+O Laragon também pode ser utilizado como ambiente de desenvolvimento no Windows.
 
-## Agentic Development
+## Instalação
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 1. Clonar o repositório
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone URL_DO_SEU_REPOSITORIO
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Entre na pasta do projeto:
 
-## Contributing
+```bash
+cd todo-list
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+> Substitua `URL_DO_SEU_REPOSITORIO` pelo endereço real do seu repositório Git.
 
-## Code of Conduct
+### 2. Instalar as dependências
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+### 3. Configurar o ambiente
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Crie o arquivo `.env` a partir do exemplo:
 
-## License
+```bash
+cp .env.example .env
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+No Windows, também é possível copiar o arquivo manualmente.
+
+Gere a chave da aplicação:
+
+```bash
+php artisan key:generate
+```
+
+### 4. Configurar o banco de dados
+
+Crie um banco de dados PostgreSQL com o nome `todo_list`.
+
+No arquivo `.env`, configure as variáveis:
+
+```dotenv
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=todo_list
+DB_USERNAME=postgres
+DB_PASSWORD=sua_senha
+```
+
+Substitua `sua_senha` pela senha do seu banco de dados.
+
+### 5. Executar as migrations
+
+Crie as tabelas necessárias:
+
+```bash
+php artisan migrate
+```
+
+### 6. Iniciar o servidor
+
+```bash
+php artisan serve
+```
+
+Acesse a aplicação pelo navegador:
+
+http://127.0.0.1:8000
+
+## Estrutura principal do projeto
+
+```text
+todo-list/
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       └── TaskController.php
+│   └── Models/
+│       └── Task.php
+├── database/
+│   └── migrations/
+│       └── create_tasks_table.php
+├── resources/
+│   └── views/
+│       └── tasks/
+│           └── index.blade.php
+├── routes/
+│   └── web.php
+├── .env.example
+└── README.md
+```
+
+## Rotas da aplicação
+
+| Método HTTP | Rota | Descrição |
+|---|---|---|
+| GET | `/tasks` | Lista as tarefas |
+| POST | `/tasks` | Cadastra uma tarefa |
+| PATCH | `/tasks/{task}/toggle` | Alterna o status da tarefa |
+| DELETE | `/tasks/{task}` | Exclui uma tarefa |
+
+## Conceitos do Laravel aplicados
+
+Este projeto utiliza conceitos fundamentais do desenvolvimento web com Laravel:
+
+- **MVC:** separação entre Model, View e Controller.
+- **Rotas:** definição dos caminhos da aplicação.
+- **Migrations:** controle da estrutura do banco de dados.
+- **Eloquent ORM:** consultas e operações no banco de dados.
+- **Blade:** criação de páginas dinâmicas.
+- **Validação:** verificação dos dados enviados pelos formulários.
+- **CSRF Protection:** proteção dos formulários contra requisições maliciosas.
+
+## Objetivo do projeto
+
+O objetivo é praticar PHP e Laravel por meio de uma aplicação CRUD, desenvolvendo conhecimentos sobre organização de código, banco de dados, requisições HTTP, validação de dados e criação de interfaces web.
+
+## Melhorias futuras
+
+- Implementar a edição de tarefas.
+- Adicionar filtros por status.
+- Criar cadastro e login de usuários.
+- Associar tarefas ao usuário autenticado.
+- Adicionar datas de vencimento e prioridades.
+- Melhorar a responsividade e a experiência visual.
+
+## Autor
+Eldis Nogueira
+Desenvolvido como projeto de estudo para aprimorar conhecimentos em PHP e Laravel.
